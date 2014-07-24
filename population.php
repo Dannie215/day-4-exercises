@@ -1,32 +1,15 @@
 <?php
-$city = $_GET['city'];
-?>
-	 
-<h1> Welcome to Population Data </h3>
+// Creates a connection to a MySQL server.
+// Creating the variables to plug into the mysql_connect() function
+// is optional, as they can be entered “manually.”
+$connection = mysql_connect('127.0.0.1', 'root', 'basketbal1');
+mysql_select_db('day-4-exercises');
+// mysql_connect(‘SQLdata.com’, ‘Jones’, ‘un1c0rn’, ‘my_database’);
 
-<?php
-		$cityPop= array('Philly' => 1553165, 
-					   'Chicago'=> 2718782, 
-					   'New York'=> 8405837, 
-					   'Dallas' => 1257676,
-					   'Miami' => 417650
-				);
+// Check connection
+if (!$connection) {
+  die('Unable to connect: ' . mysql_errno());
+}
 
-		if ($cityPop[$city]){
+?>
 
-			print 'The population of ' . $city . ' is ' . $cityPop[$city];
-		}
-		else {
-			print " I don't know where you're from dude";
-		}	 
-?>
-           
-<h2>Other Cities</h2>
-<ul>
-<?php
-  foreach ($cityPop as $name => $value) {
-    print '<li><a href="http://danniehost.com/population.php?city=' . $name  . '">' . $name
-    . '</a></li>';
-  }
-?>
-</ul>
