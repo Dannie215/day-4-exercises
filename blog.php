@@ -1,36 +1,27 @@
-<h1>Welcome to Dannie's Blog!</h1>
-
 <?php
-
-$articles = array();
-
-$article = new stdClass();
-$article->name = 'Dannie';
-$article->author = 'Dan';
-$article->body = '<p>Dannie the phantom is the man no body is greater bruh</p>';
-$articles[] = $article;
+$connection = mysql_connect('127.0.0.1', 'root', 'basketbal1');
+mysql_select_db('day4exercises');
+// mysql_connect(‘SQLdata.com’, ‘Jones’, ‘un1c0rn’, ‘my_database’);
 
 
-$article = new stdClass();
-$article->name = 'Danielle';
-$article->author = 'Ms. Dan';
-$article->body ='<p>Dannie the phantom is the man no body is greater bruh</p>' ;
-$articles[] = $article;
-
-
-$article = new stdClass();
-$article->name = 'Danny';
-$article->author = 'Vanilla Ice';
-$article->body = '<p>Dannie the phantom is the man no body is greater bruh</p>';
-$articles[] = $article;
-
-foreach ($articles as $article){
-	print '<article>';
-    print '<h2 style= "font: bold red;">' . $article->name . '</h2>';
-    print '<em>By: ' . $article->author . '</em><br/>';
-    print $article->body . '<br/><br/>';
-    print '</article>';
-
+// Check connection
+if (!$connection) {
+  die('Unable to connect: ' . mysql_errno());
 }
 
+if ($connection) {
+  //die('YAY: ' . mysql_errno());
+  // SQL Query
+  $result = mysql_query('SELECT title, author, body FROM blog');
+
+  // Fetch the data from the result
+  while ($row = mysql_fetch_array($result)) {
+    echo " " . $row['title'] . "<br>" .
+	 ""  . $row['author']  . "<br>" .
+         " "  . $row['body']  . "<br>";
+  }
+}
+
+mysql_close($connection);
 ?>
+
